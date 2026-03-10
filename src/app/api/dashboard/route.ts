@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function GET() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
   if (!process.env.BASE_URL) {
     return NextResponse.json(
       { message: "Server configuration error: BASE_URL is not defined" },
@@ -11,9 +15,11 @@ export async function GET() {
   try {
     // Fetch profile data from the database or an external API
     const res = await fetch(`${process.env.BASE_URL}/api/dashboard`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.API_TOKEN}`,
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -27,6 +33,7 @@ export async function GET() {
     }
 
     const userData = await res.json();
+    console.log("DASHBOARD DATA FROM EXTERNAL API:", userData);
     return NextResponse.json(userData);
   } catch (error) {
     console.error("DASHBOARD ROUTE ERROR:", error);
