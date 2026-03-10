@@ -10,7 +10,6 @@ import { useAddresses } from "@/hooks/addresses/useAddresses";
 export default function AddressCard({ setOpen }: any) {
   const { data } = useAddresses();
 
-  console.log(data?.addresses);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [editAddress, setEditAddress] = useState<any>(null);

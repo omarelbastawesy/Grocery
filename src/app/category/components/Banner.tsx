@@ -7,7 +7,6 @@ import { useCategories } from "@/hooks/categories/useCategories";
 
 export const Banner = () => {
   const { data: categories } = useCategories();
-  console.log(categories?.categories);
 
   return (
     <div className="w-full overflow-x-auto pb-4 scrollbar-hide ">

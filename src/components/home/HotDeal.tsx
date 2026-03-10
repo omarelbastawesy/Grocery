@@ -39,7 +39,6 @@ export default function HotDeal() {
     setData(data);
   };
 
-  console.log(data);
 
   return (
     <Container className="flex flex-col gap-4 mt-9 md:mt-16 lg:mt-24">

@@ -15,7 +15,6 @@ export default function CartPage() {
   const { data: meals } = useMeals();
 
   const { data } = useAllCart();
-  console.log(data?.cart);
   return (
     <Container className="pt-12 pb-24">
       {/* Header */}

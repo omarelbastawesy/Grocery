@@ -12,7 +12,6 @@ async function loginUser(data: { login: string; password: string }) {
 
   if (!res.ok) {
     const errorData = await res.json().catch(() => null);
-    console.log(errorData);
     throw new Error("Failed to login");
   }
   const userData = await res.json();
@@ -38,7 +37,6 @@ async function registerUser(data: {
 
   if (!res.ok) {
     const errorData = await res.json().catch(() => null);
-    console.log(errorData);
     throw new Error("Failed to register");
   }
   const newUser = await res.json();
@@ -53,7 +51,6 @@ async function forgetPassword(data: { identifier: string | null }) {
 
   if (!res.ok) {
     const errorData = await res.json().catch(() => null);
-    console.log(errorData);
     throw new Error("Failed to forget password");
   }
   const newUser = await res.json();
@@ -69,7 +66,6 @@ async function otpUser(data: { otp: string; identifier: string | null }) {
 
   if (!res.ok)  {
     const errorData = await res.json().catch(() => null);
-    console.log(errorData);
     throw new Error("Failed to otp");
   }
   const otpCode = await res.json();

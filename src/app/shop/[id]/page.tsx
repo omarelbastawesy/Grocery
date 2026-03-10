@@ -45,7 +45,6 @@ export default function App() {
 
   const { data: meal } = useMealById(proms);
 
-  console.log(meal);
   const discount =
     ((meal?.meal.price - meal?.meal.discount_price) / meal?.meal.price) * 100;
 

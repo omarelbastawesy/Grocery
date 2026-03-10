@@ -14,7 +14,6 @@ export default function NewProduct() {
 
   useEffect(() => {
     setData(newProducts?.newProducts.slice(1, 6));
-    console.log("new products:", newProducts?.newProducts);
   }, [newProductsLoading]);
 
   const upData = (cat: string) => {
@@ -25,7 +24,6 @@ export default function NewProduct() {
     setCategory(cat);
   };
 
-  console.log("data:", data);
   return (
     <Container className="flex flex-col gap-4 mt-9 md:mt-16 lg:mt-24">
       <Head title="New Product" />

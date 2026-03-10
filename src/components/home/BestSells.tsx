@@ -86,8 +86,6 @@ const products: Product[] = [
 export default function BestSells() {
   const { data: bestSells } = useBestSells();
 
-  console.log("best sells:", bestSells?.bestSells.slice(1, 6));
-
   return (
     <Container className="flex flex-col gap-4">
       <Head title="Daily Best Sells" />

@@ -17,8 +17,6 @@ export default function SlideProduct({ meals }: any) {
     }
   };
 
-  console.log(meals);
-
   return (
     <section className="mb-12 relative group/section">
       <div className="relative flex items-center gap-2 md:gap-4 lg:gap-6">
