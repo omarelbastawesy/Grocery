@@ -10,7 +10,7 @@ export const imageSchema = z
     if (val instanceof FileList) return val[0];
     return val as File;
   })
-  .refine((file) => !file || file.size <= 5 * 1024 * 1024, {
+  .refine((file) => !file || file.size <= 2 * 1024 * 1024, {
     message: "Max file size is 5MB",
   })
   .refine((file) => !file || file.type.startsWith("image/"), {
