@@ -28,7 +28,7 @@ export default function NewProduct() {
     <Container className="flex flex-col gap-4 mt-9 md:mt-16 lg:mt-24">
       <Head title="New Product" />
 
-      <div className="content-stretch flex flex-col items-end relative shrink-0 w-full">
+      <div className="hidden sm:flex justify-end content-stretch flex-col items-end relative shrink-0 w-full">
         <div className="content-stretch flex font-['Inter:Regular',sans-serif] font-normal items-center justify-between not-italic p-[5px] relative shrink-0 text-[18px] w-[364px]">
           <button
             onClick={() => {

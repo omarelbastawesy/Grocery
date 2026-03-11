@@ -5,31 +5,34 @@ import {
   Search,
   ShoppingCart,
   User,
-  Bell,
 } from "lucide-react";
 import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import Container from "../common/Container";
 import { useAllCart } from "@/hooks/cart/useCart";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Nav() {
   const { data } = useAllCart();
+  const router = useRouter();
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/shop?search=${searchTerm.trim()}`);
+    }
+  };
 
   return (
     <nav className="border-b shadow-sm z-50">
-      <Container className="flex items-center justify-between lg:gap-8 gap-4 py-3">
-        <Link href="/" className="cursor-pointer md:block hidden">
+      <Container className="flex flex-wrap items-center justify-between lg:gap-8 gap-4 py-3">
+        <Link href="/" className="cursor-pointer block">
           <svg
-            width="144"
+            width="120"
             height="35"
-            viewBox="0 0 144 35"
+            viewBox="0 0 120 35"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -82,19 +85,19 @@ export default function Nav() {
         </Link>
         <Link
           href="/"
-          className="md:flex items-center gap-1.5 hidden cursor-pointer text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
+          className="hidden sm:flex items-center gap-1.5 cursor-pointer text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
         >
           <House className="size-5" />
-          <p>Home</p>
+          <p className="">Home</p>
         </Link>
         <Link
           href="/category"
-          className="md:flex items-center gap-1.5 hidden cursor-pointer text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
+          className="flex items-center gap-1.5 cursor-pointer text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
         >
           <LayoutGrid className="size-5" />
-          <p>Categories</p>
+          <p className="hidden sm:block">Categories</p>
         </Link>
-        <div className="lg:flex hidden items-center flex-1 max-w-md group">
+        <form onSubmit={handleSearch} className="flex items-center flex-1 min-w-[300px] lg:min-w-0 order-last lg:order-0 group">
           <div className="flex flex-1 gap-2 bg-gray-50 rounded-s-xl p-2.5 border border-gray-200 focus-within:bg-white focus-within:border-[#014162]/30 transition-all">
             <div className="cursor-pointer flex gap-1.5 justify-center items-center text-xs font-bold text-gray-500 hover:text-[#014162] whitespace-nowrap px-1">
               All Categories
@@ -105,15 +108,17 @@ export default function Nav() {
               className="bg-transparent border-0 outline-0 text-sm w-full placeholder:text-gray-400 font-medium"
               type="text"
               placeholder="Search For Items...."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button className="p-2.5 cursor-pointer rounded-e-xl bg-[#014162] hover:opacity-90 transition-opacity">
+          <button type="submit" className="p-2.5 cursor-pointer rounded-e-xl bg-[#014162] hover:opacity-90 transition-opacity">
             <Search className="text-white size-5" />
           </button>
-        </div>
+        </form>
         <Link
           href="/cart"
-          className="md:flex gap-2 hidden items-center cursor-pointer group text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
+          className="flex gap-2 items-center cursor-pointer group text-[#0e1112] hover:text-[#014162] transition-colors font-medium text-sm"
         >
           <div className="relative">
             <ShoppingCart className="text-gray-400 group-hover:text-[#014162] transition-colors size-6" />
@@ -121,67 +126,15 @@ export default function Nav() {
               {data?.cart.items.length}
             </span>
           </div>
-          <p>My Cart</p>
+          <p className="hidden sm:block">My Cart</p>
         </Link>
         <Link
           href="/profile/dashboard"
-          className="bg-[#014162] hover:scale-[1.02] active:scale-[0.98] cursor-pointer rounded-xl px-5 py-2.5 md:flex items-center gap-2 hidden transition-all shadow-sm"
+          className="bg-[#014162] hover:scale-[1.02] active:scale-[0.98] cursor-pointer rounded-xl px-5 py-2.5 flex items-center gap-2 transition-all shadow-sm"
         >
           <User className="text-white size-5" />
-          <p className="text-white font-semibold text-sm">Sarah's Profile</p>
+          <p className="text-white font-semibold text-sm hidden lg:block">Sarah's Profile</p>
         </Link>
-        <div className="flex items-center gap-4 md:hidden">
-          <Link
-            className="cursor-pointer active:scale-95 transition-transform"
-            href="/"
-          >
-            <svg
-              width="32"
-              height="36"
-              viewBox="0 0 30 34"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-sm"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M28.1115 12.8281C29.057 13.9907 29.6748 15.3833 29.9011 16.8624C30.0751 17.983 30.0191 19.1271 29.7365 20.2256C29.454 21.324 28.9507 22.354 28.2572 23.2534C27.9028 23.7039 27.5483 24.1545 27.2091 24.6051C26.7296 25.2173 26.4646 25.9691 26.455 26.7455C26.4545 28.4359 25.8612 30.0731 24.7777 31.3743C23.6941 32.6756 22.1884 33.5591 20.5203 33.8724C20.257 33.956 19.9824 33.9991 19.7059 34H10.3628C10.1071 33.9957 9.8531 33.9552 9.60871 33.8798C7.9208 33.5881 6.39028 32.7127 5.28683 31.4077C4.18328 30.1025 3.57749 28.4516 3.57611 26.7455C3.56633 25.9691 3.30151 25.2173 2.82201 24.6051C2.46762 24.147 2.12074 23.7039 1.84169 23.3585C0.534331 21.7242 -0.115991 19.6641 0.0170162 17.5788C0.150122 15.4934 1.05718 13.5319 2.56182 12.0756C4.06637 10.6193 6.06108 9.77234 8.15788 9.69932C10.2548 9.6263 12.3039 10.3325 13.907 11.6806C14.2123 11.9388 14.5999 12.0805 15.0005 12.0805C15.401 12.0805 15.7885 11.9388 16.0939 11.6806C17.2441 10.718 18.631 10.0778 20.1119 9.82584C21.5929 9.57386 23.1145 9.71915 24.5204 10.2468C25.9263 10.7744 27.1658 11.6653 28.1115 12.8281ZM15.2102 27.3011C18.3604 27.3011 20.914 24.7044 20.914 21.5012C20.914 18.2978 18.3604 15.7012 15.2102 15.7012C12.0601 15.7012 9.50642 18.2978 9.50642 21.5012C9.50642 24.7044 12.0601 27.3011 15.2102 27.3011Z"
-                fill="#014162"
-              />
-              <path
-                d="M8.74158 6.11926C8.40733 5.09596 8.3469 3.99496 8.5669 2.93766C8.787 1.88036 9.27894 0.907831 9.98851 0.127296C10.0269 0.0834091 10.0743 0.049271 10.1269 0.0274285C10.1797 0.00558586 10.2364 -0.00339722 10.2927 0.00114889C11.196 0.133207 12.0546 0.498056 12.7931 1.06356C13.5315 1.62906 14.127 2.37786 14.5272 3.244C14.9274 4.11013 15.1201 5.06702 15.0881 6.03038C15.0561 6.99374 14.8005 7.934 14.3439 8.76834C14.0601 9.27011 13.8697 9.82459 13.783 10.4019C13.7761 10.4509 13.7566 10.497 13.7267 10.5352C13.6969 10.5733 13.6576 10.602 13.6134 10.6183C13.5691 10.6346 13.5214 10.6377 13.4756 10.6273C13.4298 10.617 13.3875 10.5936 13.3535 10.5597C12.9467 10.1629 12.4703 9.85439 11.9514 9.65137C11.2076 9.34121 10.5358 8.86511 9.98189 8.25557C9.42794 7.64602 9.00493 6.91736 8.74158 6.11926Z"
-                fill="#014162"
-              />
-            </svg>
-          </Link>
-          <div className="cursor-pointer relative mt-0.5 hover:rotate-12 transition-transform">
-            <span className="bg-red-500 size-2 rounded-full absolute top-0 right-0 border-2 border-white animate-pulse"></span>
-            <Bell className="text-[#014162] size-6" />
-          </div>
-        </div>
-        <div className="flex-1 max-w-[200px] md:hidden">
-          <Select>
-            <SelectTrigger className="w-full h-9 text-[11px] bg-gray-50 border-gray-200 rounded-lg focus:ring-1 focus:ring-[#014162]/20">
-              <div className="truncate pr-2">
-                <SelectValue placeholder="Villa 14, Street 23, District 5..." />
-              </div>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="choise1">Villa 14, Street 23</SelectItem>
-                <SelectItem value="choise2">District 5 Office</SelectItem>
-                <SelectItem value="choise3">New Cairo Branch</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="relative md:hidden group cursor-pointer active:scale-90 transition-transform">
-          <ShoppingCart className="text-[#0e1112] size-6" />
-          <span className="absolute -top-1.5 -right-1.5 bg-[#014162] text-white text-[9px] font-bold rounded-full size-4 flex justify-center items-center ring-1 ring-white">
-            3
-          </span>
-        </div>
       </Container>
     </nav>
   );

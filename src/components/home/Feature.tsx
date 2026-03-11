@@ -13,11 +13,11 @@ const FeatureCard = ({
   title: string;
   description: string;
 }) => (
-  <div className="flex items-center gap-[15px] p-5 rounded-[3px]">
-    {icon}
+  <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-[15px] p-5 rounded-[3px] flex-1 min-w-[280px]">
+    <div className="shrink-0">{icon}</div>
     <div className="flex flex-col gap-2">
       <h3 className="font-semibold text-[18px] text-[#253d4e]">{title}</h3>
-      <p className="font-medium text-[16px] leading-[100%] text-[#adadad] max-w-[225px]">
+      <p className="font-medium text-[16px] leading-[1.4] text-[#adadad] max-w-[225px]">
         {description}
       </p>
     </div>
@@ -27,7 +27,7 @@ const FeatureCard = ({
 export default function Feature() {
   return (
     <Container className="flex flex-col gap-6 p-8 mt-18">
-      <div className="flex flex-wrap items-center justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
         <FeatureCard
           icon={
             <Image src={bestPrice} alt="bestPrice" width={52} height={52} />

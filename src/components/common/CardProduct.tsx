@@ -22,7 +22,7 @@ export function CardProductA({
   const { mutate } = useAddToCart();
 
   return (
-    <div className="bg-white w-[225px] shrink-0 flex flex-col h-full items-start border border-slate-200 hover:border-[#014162]/30 hover:shadow-xl transition-all duration-300 p-4 relative rounded-xl group">
+    <div className="bg-white w-full sm:w-[225px] flex flex-col h-full items-start border border-slate-200 hover:border-[#014162]/30 hover:shadow-xl transition-all duration-300 p-4 relative rounded-xl group">
       <div className="relative w-full h-[180px] bg-slate-50/50 rounded-xl overflow-hidden flex items-center justify-center p-4 mb-4 transition-transform duration-500 group-hover:scale-[1.03]">
         <Image
           alt={title || "Product image"}

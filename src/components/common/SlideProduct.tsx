@@ -37,7 +37,7 @@ export default function SlideProduct({ meals }: any) {
             const discount =
               ((meal.price - meal.discount_price) / meal.price) * 100;
             return (
-              <div key={meal.id} className="min-w-[304px] h-full">
+              <div key={meal.id} className="min-w-full sm:min-w-[304px] h-full">
                 <CardProductC
                   product={{
                     id: meal.id,

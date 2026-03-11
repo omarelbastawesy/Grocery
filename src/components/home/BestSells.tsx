@@ -90,7 +90,7 @@ export default function BestSells() {
     <Container className="flex flex-col gap-4">
       <Head title="Daily Best Sells" />
 
-      <div className="flex gap-[14px] items-center justify-center flex-wrap">
+      <div className="flex gap-5 items-center justify-center flex-wrap">
         {bestSells?.bestSells.slice(1, 6).map((product: any) => (
           <CardProductA
             key={product.id}
