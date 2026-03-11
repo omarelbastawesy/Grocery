@@ -91,7 +91,6 @@ export default function Basic() {
     } catch (error: any) {
       setSuccess(false);
       setOpen(true);
-      console.log(error.response?.data?.errors);
     }
   };
 

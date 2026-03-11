@@ -31,12 +31,10 @@ export type CartAPIResponse = {
   };
 };
 
-
 async function getCart(): Promise<CartAPIResponse> {
-  const response = await fetch("/api/cart"); 
+  const response = await fetch("/api/cart");
   if (!response.ok) throw new Error("API Error");
   const payload: CartAPIResponse = await response.json();
-  console.log("Cart Proxy Success:", payload);
   return payload;
 }
 

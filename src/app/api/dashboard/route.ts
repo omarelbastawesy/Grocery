@@ -33,7 +33,7 @@ export async function GET() {
     }
 
     const userData = await res.json();
-    console.log("DASHBOARD DATA FROM EXTERNAL API:", userData);
+
     return NextResponse.json(userData);
   } catch (error) {
     console.error("DASHBOARD ROUTE ERROR:", error);

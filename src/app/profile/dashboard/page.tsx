@@ -14,8 +14,6 @@ export default function Dashboard() {
   // const { data: userData, isLoading: userLoading } = useProfile();
   const { data: dashboardData, isLoading: dashboardLoading } = useDashboard();
 
-  console.log("dashboardData", dashboardData);
-
   return (
     <div className="profile-dashboard relative">
       {dashboardLoading ? (

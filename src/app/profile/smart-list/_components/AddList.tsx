@@ -275,8 +275,8 @@ export default function AddList({
               )}
 
               {isDropdownOpen && (
-                <div className="mt-2 bg-gray-50/50 rounded-xl border border-gray-100 max-h-48 overflow-y-auto p-1.5 animate-in slide-in-from-top-1 duration-200">
-                  <div className="px-2 pb-2 sticky top-0 bg-gray-50/50 backdrop-blur-sm z-10">
+                <div className="mt-2 bg-gray-50/50 rounded-xl border border-gray-100 max-h-48 overflow-y-auto animate-in slide-in-from-top-1 duration-200">
+                  <div className="px-2 py-2 sticky top-0 bg-gray-50/50 backdrop-blur-sm z-10">
                     <input
                       type="text"
                       placeholder="Search products..."
